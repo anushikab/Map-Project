@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Neighborhood Map</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <script src="knockout-3.2.0.js"></script><!-- Third party library (framework knockout)-->
+    </head>
+    <body>
+        <div class="container">
+            <div id="top_div">
+                <div id="bart_loc">Locations</div>
+                <div id="filter_div">
+                    <img id="filter_img" src="filtericon.png" alt="SELECT SEARCH TYPE" height="40" width="40" />
+                    <div class="dropdown-content" id="filter_bind" data-bind="foreach: places">
+                        <a href="#" data-bind="text: place, click: function(){applyFilter($index());}"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="search">
+                <!--<input type="text" id="myInput" onkeyup="applySearch()" placeholder="Station location">-->
+                <input type="search" id="myInput" data-bind="textInput: query" autocomplete="off" 
+                       placeholder="Station location" />
+                <ul id="items_ul" data-bind="foreach: Locations">
+                    <li><a href="#" data-bind="text: address, text: location, click: function(){openInfoWindow($data);}" ></a></li>
+                </ul> 
+            </div>
+
+            <div id="googleMap"></div>
+        </div>
+
+
+        <script type="text/javascript" src="script.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDTp02IeQq8v21wRpppfEafoxLqtPOCIM&callback=myMap" async defer onerror="throwError()"></script>
+    </body>
+</html>
